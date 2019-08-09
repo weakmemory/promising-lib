@@ -1,7 +1,4 @@
-Require Import List.
-Require Import PeanoNat.
 Require Import Orders.
-Require Import MSetList.
 Require Import Omega.
 Require Import Coq.Logic.PropExtensionality.
 
@@ -11,7 +8,6 @@ Require Import DataStructure.
 Require Import Basic.
 
 Set Implicit Arguments.
-Import ListNotations.
 
 
 Module Loc := Ident.
