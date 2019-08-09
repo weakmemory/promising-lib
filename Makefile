@@ -1,6 +1,6 @@
 COQMODULE    := PromisingLib
 COQTHEORIES  := lib/sflib/*.v \
-	src/src/*.v \
+	src/*.v \
 
 .PHONY: all theories clean
 
