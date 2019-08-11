@@ -1,24 +1,16 @@
 COQMODULE    := PromisingLib
-COQTHEORIES  := lib/sflib/*.v \
-	src/*.v \
+COQTHEORIES  := src/*.v \
 
 .PHONY: all theories clean
 
-all: sflib Makefile.coq
+all: Makefile.coq
 	$(MAKE) -f Makefile.coq all
 
-quick: sflib-quick Makefile.coq
+quick: Makefile.coq
 	$(MAKE) -f Makefile.coq quick
 
-sflib: lib/sflib
-	$(MAKE) -C lib/sflib
-
-sflib-quick: lib/sflib
-	$(MAKE) -C lib/sflib quick
-
 Makefile.coq: Makefile $(COQTHEORIES)
-	(echo "-R lib/sflib sflib"; \
-   echo "-R src $(COQMODULE)"; \
+	(echo "-R src $(COQMODULE)"; \
    echo $(COQTHEORIES)) > _CoqProject
 	coq_makefile -f _CoqProject -o Makefile.coq
 

@@ -2,7 +2,7 @@ Require Import Orders.
 Require Import Omega.
 Require Import Coq.Logic.PropExtensionality.
 
-Require Import sflib.
+From sflib Require Import sflib.
 
 Require Import DataStructure.
 Require Import Basic.
