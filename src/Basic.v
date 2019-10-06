@@ -223,6 +223,7 @@ Proof. destruct a,b; eauto. Qed.
 
 Hint Resolve orb_symm.
 
+
 Lemma in_prod
       A B
       (a: A)
@@ -258,4 +259,29 @@ Lemma prod_in
 Proof.
   revert b IN. induction l; ss; i.
   des; subst; eauto.
+Qed.
+
+Lemma Forall_app
+      A
+      (P: A -> Prop)
+      (l1 l2: list A)
+      (FORALL1: List.Forall P l1)
+      (FORALL2: List.Forall P l2):
+  List.Forall P (l1 ++ l2).
+Proof.
+  induction l1; ss.
+  inv FORALL1. eauto.
+Qed.
+
+Lemma Forall_app_inv
+      A
+      (P: A -> Prop)
+      (l1 l2: list A)
+      (FORALL: List.Forall P (l1 ++ l2)):
+  <<FORALL1: List.Forall P l1>> /\
+             <<FORALL2: List.Forall P l2>>.
+Proof.
+  induction l1; split; ss.
+  - inv FORALL. exploit IHl1; eauto. i. des. eauto.
+  - inv FORALL. exploit IHl1; eauto. i. des. ss.
 Qed.
