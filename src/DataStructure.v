@@ -206,6 +206,35 @@ Module UsualSet (S: UsualOrderedType).
       eapply H0; eauto.
   Qed.
 
+  Lemma disjoint_union
+        lhs1 lhs2 rhs
+        (DISJOINT1: disjoint lhs1 rhs)
+        (DISJOINT2: disjoint lhs2 rhs):
+    disjoint (union lhs1 lhs2) rhs.
+  Proof.
+    ii. rewrite union_spec in LHS. des.
+    - eapply DISJOINT1; eauto.
+    - eapply DISJOINT2; eauto.
+  Qed.
+
+  Lemma disjoint_union_inv_l
+        lhs1 lhs2 rhs
+        (DISJOINT: disjoint (union lhs1 lhs2) rhs):
+    disjoint lhs1 rhs.
+  Proof.
+    ii. eapply DISJOINT; eauto.
+    apply Facts.union_2. ss.
+  Qed.
+
+  Lemma disjoint_union_inv_r
+        lhs1 lhs2 rhs
+        (DISJOINT: disjoint (union lhs1 lhs2) rhs):
+    disjoint lhs2 rhs.
+  Proof.
+    ii. eapply DISJOINT; eauto.
+    apply Facts.union_3. ss.
+  Qed.
+
   Lemma ext lhs rhs
         (EXT: forall i, mem i lhs = mem i rhs):
     lhs = rhs.
