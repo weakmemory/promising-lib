@@ -8,7 +8,6 @@ Require Import FMapFacts.
 Require Import MSetList.
 
 From sflib Require Import sflib.
-From Paco Require Import paco.
 
 Require Import DataStructure.
 
@@ -86,10 +85,10 @@ Proof.
 Qed.
 
 Lemma rtc_implies A (R1 R2: A -> A -> Prop)
-      (IMPL: R1 <2= R2):
-  rtc R1 <2= rtc R2.
+      (IMPL: forall a b, R1 a b -> R2 a b):
+  forall a b, rtc R1 a b -> rtc R2 a b.
 Proof.
-  i. induction PR; eauto.
+  i. induction H; eauto.
 Qed.
 
 Lemma rtc_refl
@@ -150,7 +149,7 @@ Qed.
 
 Lemma rtcn_imply
       A (R1 R2: A -> A -> Prop) n a1 a2
-      (LE: R1 <2= R2)
+      (LE: forall a b, R1 a b -> R2 a b)
       (RTCN: rtcn R1 n a1 a2):
   rtcn R2 n a1 a2.
 Proof.

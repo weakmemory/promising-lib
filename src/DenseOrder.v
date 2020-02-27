@@ -5,7 +5,6 @@ Require Import PArith.
 Require Import FMapPositive.
 
 From sflib Require Import sflib.
-From Paco Require Import paco.
 
 Require Import Axioms.
 Require Import Basic.
@@ -108,7 +107,7 @@ Module DOAux.
   Defined.
   Global Opaque eq_dec.
 
-  Definition le := lt \2/ eq.
+  Definition le := fun x y => lt x y \/ eq x y.
   Lemma le_lteq : forall x y : t, le x y <-> lt x y \/ x = y.
   Proof.
     auto.
@@ -424,7 +423,7 @@ Module DenseOrder.
   Defined.
   Global Opaque eq_dec.
 
-  Definition le := lt \2/ eq.
+  Definition le := fun x y => lt x y \/ eq x y.
   Lemma le_lteq : forall x y : t, le x y <-> lt x y \/ x = y.
   Proof. auto. Qed.
   Global Opaque le.
