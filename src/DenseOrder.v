@@ -832,4 +832,22 @@ Module DenseOrderFacts.
       + rewrite H at 1. auto.
       + rewrite H at 1. auto.
   Qed.
+
+  Lemma le_join_l
+        lhs rhs
+        (LE: DenseOrder.le rhs lhs):
+    DenseOrder.join lhs rhs = lhs.
+  Proof.
+    unfold DenseOrder.join. condtac; auto.
+    apply antisym; auto.
+  Qed.
+
+  Lemma le_join_r
+        lhs rhs
+        (LE: DenseOrder.le lhs rhs):
+    DenseOrder.join lhs rhs = rhs.
+  Proof.
+    rewrite DenseOrder.join_comm.
+    apply le_join_l; auto.
+  Qed.
 End DenseOrderFacts.
