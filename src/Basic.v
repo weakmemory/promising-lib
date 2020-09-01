@@ -176,6 +176,14 @@ Definition option_rel {A B} (P: A -> B -> Prop) : option A -> option B -> Prop :
              | None, None => True
              | _, _ => False end.
 
+Definition option_rel3 {A B C} (P: A -> B -> C -> Prop):
+  option A -> option B -> option C -> Prop :=
+  fun a b c => match a, b, c with
+            | Some x, Some y, Some z => P x y z
+            | None, None, None => True
+            | _, _, _ => False
+            end.
+
 Lemma strengthen
       (A B: Prop)
       (H: A /\ (A -> B)):
