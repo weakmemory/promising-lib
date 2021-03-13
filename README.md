@@ -7,6 +7,6 @@
 - Install via opam
 
         opam repo add coq-released https://coq.inria.fr/opam/released
-        opam remote add coq-sflib -k git https://github.com/snu-sf/sf-opam-coq-archive
-        opam remote add coq-promising -k git https://github.com/snu-sf/promising-opam-coq-archive
+        opam repo add coq-sflib -k git https://github.com/snu-sf/sf-opam-coq-archive.git
+        opam repo add coq-promising -k git https://github.com/snu-sf/promising-opam-coq-archive.git#8.13
         opam install coq-promising-lib
