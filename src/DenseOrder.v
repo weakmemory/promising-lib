@@ -36,7 +36,8 @@ Module DOAux.
 
   Definition eq := @eq t.
   Global Program Instance eq_equiv : Equivalence eq.
-  Hint Resolve (Equivalence_Transitive eq_equiv).
+  #[export]
+  Hint Resolve (Equivalence_Transitive eq_equiv): core.
 
   Inductive lt_: forall (lhs rhs:t), Prop :=
   | lt_xO_xH lhs:
@@ -66,7 +67,8 @@ Module DOAux.
     - apply IHXY. auto.
     - apply IHXY. auto.
   Qed.
-  Hint Resolve lt_strorder_obligation_2.
+  #[export]
+  Hint Resolve lt_strorder_obligation_2: core.
 
   Global Program Instance lt_compat: Proper (eq ==> eq ==> iff) lt.
   Next Obligation.
@@ -89,6 +91,7 @@ Module DOAux.
     | xI ltl, xI rtl =>
       compare ltl rtl
     end.
+
   Lemma compare_spec :
     forall x y : t,
       CompareSpec (x = y) (lt x y) (lt y x) (compare x y).
@@ -337,14 +340,16 @@ Next Obligation.
   des; subst; auto.
   left. rewrite H. auto.
 Qed.
-Hint Resolve DOAux_le_PreOrder_obligation_2.
+#[export]
+Hint Resolve DOAux_le_PreOrder_obligation_2: core.
 
 Module DenseOrder.
   Definition t := positive.
 
   Definition eq := @eq t.
   Global Program Instance eq_equiv : Equivalence eq.
-  Hint Resolve (Equivalence_Transitive eq_equiv).
+  #[export]
+  Hint Resolve (Equivalence_Transitive eq_equiv): core.
 
   Inductive lt_: forall (lhs rhs:t), Prop :=
   | lt_xH_xO lhs:
@@ -376,14 +381,15 @@ Module DenseOrder.
     - etrans; eauto.
     - etrans; eauto.
   Qed.
-  Hint Resolve lt_strorder_obligation_2.
+  #[export]
+  Hint Resolve lt_strorder_obligation_2: core.
 
   Global Program Instance lt_compat: Proper (eq ==> eq ==> iff) lt.
   Next Obligation.
     ii. unfold eq in *. subst. auto.
   Qed.
 
-  Fixpoint compare (lhs rhs:t): comparison :=
+  Definition compare (lhs rhs:t): comparison :=
     match lhs, rhs with
     | xH, xH =>
       Eq
@@ -438,7 +444,7 @@ Module DenseOrder.
     - right. refl.
   Qed.
 
-  Fixpoint incr (x:t) :=
+  Definition incr (x:t) :=
     match x with
     | xH => xI xH
     | xO x => xO (DOAux.incr x)
@@ -451,7 +457,7 @@ Module DenseOrder.
     - apply DOAux.incr_spec.
   Qed.
 
-  Fixpoint middle (lhs rhs:t): t :=
+  Definition middle (lhs rhs:t): t :=
     match lhs, rhs with
     | _, xH => lhs
     | xH, xO rtl => xO (DOAux.decr rtl)
@@ -650,7 +656,8 @@ Next Obligation.
   des; subst; auto.
   left. rewrite H. auto.
 Qed.
-Hint Resolve DenseOrder_le_PreOrder_obligation_2.
+#[export]
+Hint Resolve DenseOrder_le_PreOrder_obligation_2: core.
 
 
 Module DOSet := UsualSet DenseOrder.

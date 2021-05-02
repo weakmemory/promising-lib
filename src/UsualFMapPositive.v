@@ -570,11 +570,11 @@ Module UsualPositiveMap' <: S with Module E:=PositiveOrderedTypeBits.
       + specialize (EQUAL xH). auto.
       + eapply eq_sig_fst. apply IHm2.
         intro i. specialize (EQUAL (xI i)). auto.
-  Grab Existential Variables.
-  { s. eapply wf_r. eauto. }
-  { s. eapply wf_r. eauto. }
+  Unshelve.
   { s. eapply wf_l. eauto. }
   { s. eapply wf_l. eauto. }
+  { s. eapply wf_r. eauto. }
+  { s. eapply wf_r. eauto. }
   Qed.
 
   Definition singleton A (key:positive) (value:A): t A :=

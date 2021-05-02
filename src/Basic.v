@@ -1,8 +1,9 @@
 Require String.
 Require Import RelationClasses.
 Require Import List.
+Require Import Arith.
 Require Import PArith.
-Require Import Omega.
+Require Import Lia.
 Require Import UsualFMapPositive.
 Require Import FMapFacts.
 Require Import MSetList.
@@ -62,15 +63,18 @@ Module IdentMap := UsualPositiveMap.
 Notation rtc := (clos_refl_trans_1n _). (* reflexive transitive closure *)
 Notation rc := (clos_refl _). (* reflexive transitive closure *)
 Notation tc := (clos_trans _). (* transitive closure *)
-Hint Immediate rt1n_refl rt1n_trans t_step.
-Hint Resolve Relation_Operators.rt1n_trans.
+#[export]
+Hint Immediate rt1n_refl rt1n_trans t_step: core.
+#[export]
+Hint Resolve Relation_Operators.rt1n_trans: core.
 
 Program Instance rtc_PreOrder A (R:A -> A -> Prop): PreOrder (rtc R).
 Next Obligation.
   ii. revert H0. induction H; auto. i.
   exploit IHclos_refl_trans_1n; eauto.
 Qed.
-Hint Resolve rtc_PreOrder_obligation_2.
+#[export]
+Hint Resolve rtc_PreOrder_obligation_2: core.
 
 Lemma rtc_tail A R
       (a1 a3:A)
@@ -130,7 +134,8 @@ Inductive rtcn A (R: A -> A -> Prop): forall (n:nat) (a1 a2:A), Prop :=
     (A23: rtcn R n a2 a3):
     rtcn R (S n) a1 a3
 .
-Hint Constructors rtcn.
+#[export]
+Hint Constructors rtcn: core.
 
 Lemma rtcn_rtc A (R: A -> A -> Prop) n a1 a2
       (RTCN: rtcn R n a1 a2):
@@ -163,7 +168,7 @@ Lemma strong_induction
 Proof.
   i. cut (forall m k, k < m -> P k); [by eauto|].
   induction m.
-  - i. omega.
+  - i. lia.
   - i. apply lt_le_S in H. inv H; eauto.
 Qed.
 
@@ -228,7 +233,8 @@ Qed.
 Lemma orb_symm (a b: bool): orb a b -> orb b a.
 Proof. destruct a,b; eauto. Qed.
 
-Hint Resolve orb_symm.
+#[export]
+Hint Resolve orb_symm: core.
 
 
 Lemma in_prod

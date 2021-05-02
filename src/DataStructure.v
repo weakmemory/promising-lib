@@ -40,7 +40,8 @@ Module UsualProd (A B:UsualOrderedType) <: UsualOrderedType.
 
   Definition eq := @eq t.
   Global Program Instance eq_equiv : Equivalence eq.
-  Hint Resolve (Equivalence_Transitive eq_equiv).
+  #[export]
+  Hint Resolve (Equivalence_Transitive eq_equiv): core.
 
   Inductive lt_ (lhs rhs:t): Prop :=
   | lt_hd
@@ -63,7 +64,8 @@ Module UsualProd (A B:UsualOrderedType) <: UsualOrderedType.
     - econs 1. rewrite HD. eauto.
     - econs 2; etransitivity; eauto.
   Qed.
-  Hint Resolve lt_strorder_obligation_2.
+  #[export]
+  Hint Resolve lt_strorder_obligation_2: core.
 
   Global Program Instance lt_compat: Proper (eq ==> eq ==> iff) lt.
   Next Obligation.
