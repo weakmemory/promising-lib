@@ -25,10 +25,6 @@ Module Ident <: OrderedTypeWithLeibniz.
   Lemma eq_leibniz (x y: t): eq x y -> x = y.
   Proof. auto. Qed.
 
-  Parameter of_string: String.string -> t.
-  Hypothesis of_string_inject:
-    forall s1 s2 (H12: s1 <> s2), of_string s1 <> of_string s2.
-
   Ltac ltb_tac :=
     match goal with
     | [H: compare ?x1 ?x2 = _ |- _] =>

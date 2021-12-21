@@ -36,8 +36,6 @@ Module DOAux.
 
   Definition eq := @eq t.
   Global Program Instance eq_equiv : Equivalence eq.
-  #[export]
-  Hint Resolve (Equivalence_Transitive eq_equiv): core.
 
   Inductive lt_: forall (lhs rhs:t), Prop :=
   | lt_xO_xH lhs:
@@ -67,8 +65,6 @@ Module DOAux.
     - apply IHXY. auto.
     - apply IHXY. auto.
   Qed.
-  #[export]
-  Hint Resolve lt_strorder_obligation_2: core.
 
   Global Program Instance lt_compat: Proper (eq ==> eq ==> iff) lt.
   Next Obligation.
@@ -328,6 +324,10 @@ Module DOAux.
     - inv H. right. refl.
   Qed.
 End DOAux.
+#[export]
+Hint Resolve (Equivalence_Transitive DOAux.eq_equiv): core.
+#[export]
+Hint Resolve DOAux.lt_strorder_obligation_2: core.
 
 Global Program Instance DOAux_le_PreOrder: PreOrder DOAux.le.
 Next Obligation.
@@ -348,8 +348,6 @@ Module DenseOrder.
 
   Definition eq := @eq t.
   Global Program Instance eq_equiv : Equivalence eq.
-  #[export]
-  Hint Resolve (Equivalence_Transitive eq_equiv): core.
 
   Inductive lt_: forall (lhs rhs:t), Prop :=
   | lt_xH_xO lhs:
@@ -381,8 +379,6 @@ Module DenseOrder.
     - etrans; eauto.
     - etrans; eauto.
   Qed.
-  #[export]
-  Hint Resolve lt_strorder_obligation_2: core.
 
   Global Program Instance lt_compat: Proper (eq ==> eq ==> iff) lt.
   Next Obligation.
@@ -644,6 +640,10 @@ Module DenseOrder.
     - inv H. right. refl.
   Qed.
 End DenseOrder.
+#[export]
+Hint Resolve (Equivalence_Transitive DenseOrder.eq_equiv): core.
+#[export]
+Hint Resolve DenseOrder.lt_strorder_obligation_2: core.
 
 Global Program Instance DenseOrder_le_PreOrder: PreOrder DenseOrder.le.
 Next Obligation.
