@@ -2,7 +2,7 @@ Require String.
 Require Import RelationClasses.
 Require Import List.
 Require Import PArith.
-Require Import Omega.
+Require Import Lia.
 Require Import UsualFMapPositive.
 Require Import FMapFacts.
 Require Import MSetList.
@@ -163,8 +163,8 @@ Lemma strong_induction
 Proof.
   i. cut (forall m k, k < m -> P k); [by eauto|].
   induction m.
-  - i. omega.
-  - i. apply lt_le_S in H. inv H; eauto.
+  - i. lia.
+  - i. apply Lt.lt_le_S in H. inv H; eauto.
 Qed.
 
 Definition option_app {A} (a b: option A) : option A :=

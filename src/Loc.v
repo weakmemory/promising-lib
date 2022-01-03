@@ -1,5 +1,4 @@
 Require Import Orders.
-Require Import Omega.
 Require Import Coq.Logic.PropExtensionality.
 
 From sflib Require Import sflib.
