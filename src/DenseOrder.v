@@ -383,7 +383,7 @@ Module DenseOrder.
     ii. unfold eq in *. subst. auto.
   Qed.
 
-  Fixpoint compare (lhs rhs:t): comparison :=
+  Definition compare (lhs rhs:t): comparison :=
     match lhs, rhs with
     | xH, xH =>
       Eq
@@ -438,7 +438,7 @@ Module DenseOrder.
     - right. refl.
   Qed.
 
-  Fixpoint incr (x:t) :=
+  Definition incr (x:t) :=
     match x with
     | xH => xI xH
     | xO x => xO (DOAux.incr x)
@@ -451,7 +451,7 @@ Module DenseOrder.
     - apply DOAux.incr_spec.
   Qed.
 
-  Fixpoint middle (lhs rhs:t): t :=
+  Definition middle (lhs rhs:t): t :=
     match lhs, rhs with
     | _, xH => lhs
     | xH, xO rtl => xO (DOAux.decr rtl)

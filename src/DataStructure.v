@@ -44,10 +44,10 @@ Module UsualProd (A B:UsualOrderedType) <: UsualOrderedType.
 
   Inductive lt_ (lhs rhs:t): Prop :=
   | lt_hd
-      (HD: A.lt lhs.(fst) rhs.(fst))
+      (HD: A.lt (fst lhs) (fst rhs))
   | lt_tl
-      (HD: lhs.(fst) = rhs.(fst))
-      (TL: B.lt lhs.(snd) rhs.(snd))
+      (HD: (fst lhs) = (fst rhs))
+      (TL: B.lt (snd lhs) (snd rhs))
   .
   Definition lt := lt_.
   Global Program Instance lt_strorder: StrictOrder lt.
@@ -71,9 +71,9 @@ Module UsualProd (A B:UsualOrderedType) <: UsualOrderedType.
   Qed.
 
   Definition compare (lhs rhs:t): comparison :=
-    match A.compare lhs.(fst) rhs.(fst) with
+    match A.compare (fst lhs) (fst rhs) with
     | Eq =>
-      B.compare lhs.(snd) rhs.(snd)
+      B.compare (snd lhs) (snd rhs)
     | Lt => Lt
     | Gt => Gt
     end.
