@@ -440,17 +440,45 @@ Module DenseOrder.
     - right. refl.
   Qed.
 
-  Definition incr (x:t) :=
+  (* Definition incr (x:t) := *)
+  (*   match x with *)
+  (*   | xH => xI xH *)
+  (*   | xO x => xO (DOAux.incr x) *)
+  (*   | xI x => xI (DOAux.incr x) *)
+  (*   end. *)
+
+  (* Lemma incr_spec: forall x, lt x (incr x). *)
+  (*   i. destruct x; econs. *)
+  (*   - apply DOAux.incr_spec. *)
+  (*   - apply DOAux.incr_spec. *)
+  (* Qed. *)
+
+  Definition incr (x: t) :=
     match x with
-    | xH => xI xH
-    | xO x => xO (DOAux.incr x)
-    | xI x => xI (DOAux.incr x)
+    | xH => xO xH
+    | xO x => xO (xI x)
+    | xI x => xI (xI x)
     end.
 
+  Lemma incr_spec_aux: forall x, DOAux.lt x (xI x).
+  Proof.
+    induction x.
+    - econs. ss.
+    - econs.
+    - econs.
+  Qed.
+
   Lemma incr_spec: forall x, lt x (incr x).
-    i. destruct x; econs.
-    - apply DOAux.incr_spec.
-    - apply DOAux.incr_spec.
+  Proof.
+    i. destruct x; ss.
+    - econs. apply incr_spec_aux.
+    - econs. apply incr_spec_aux.
+    - econs.
+  Qed.
+
+  Lemma incr_mon: forall x y, lt x y -> lt (incr x) (incr y).
+  Proof.
+    i. inv H; ss; try by repeat econs.
   Qed.
 
   Definition middle (lhs rhs:t): t :=
