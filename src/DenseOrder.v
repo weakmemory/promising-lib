@@ -324,8 +324,10 @@ Module DOAux.
     - inv H. right. refl.
   Qed.
 End DOAux.
+
+Definition _DOAux_eq_transitive := Equivalence_Transitive DOAux.eq_equiv.
 #[export]
-Hint Resolve (Equivalence_Transitive DOAux.eq_equiv): core.
+Hint Resolve _DOAux_eq_transitive: core.
 #[export]
 Hint Resolve DOAux.lt_strorder_obligation_2: core.
 
@@ -668,8 +670,10 @@ Module DenseOrder.
     - inv H. right. refl.
   Qed.
 End DenseOrder.
+
+Definition _DenseOrder_eq_transitive := Equivalence_Transitive DenseOrder.eq_equiv.
 #[export]
-Hint Resolve (Equivalence_Transitive DenseOrder.eq_equiv): core.
+Hint Resolve _DenseOrder_eq_transitive: core.
 #[export]
 Hint Resolve DenseOrder.lt_strorder_obligation_2: core.
 
