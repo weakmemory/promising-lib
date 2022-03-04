@@ -775,7 +775,7 @@ Module DOMap.
     destruct (raw_max_key t0_2) eqn:Y.
     { hexploit raw_max_key_spec2; eauto. i. des. splits; i; auto.
       destruct k'; ss.
-      - exploit MAX; eauto. i. inv x.
+      - exploit MAX; eauto. intros x. inv x.
         + left. econs. eauto.
         + right. inv H. refl.
       - left. econs.
@@ -785,7 +785,7 @@ Module DOMap.
     { hexploit raw_max_key_spec2; eauto. i. des. splits; i; auto.
       destruct k'; ss.
       - erewrite raw_max_key_spec1 in FIND'; eauto. congr.
-      - exploit MAX; eauto. i. inv x.
+      - exploit MAX; eauto. intros x. inv x.
         + left. econs. eauto.
         + right. inv H. refl.
       - left. econs.
