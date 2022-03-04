@@ -40,8 +40,9 @@ Module UsualProd (A B:UsualOrderedType) <: UsualOrderedType.
 
   Definition eq := @eq t.
   Global Program Instance eq_equiv : Equivalence eq.
+  Definition _eq_equiv_trans := Equivalence_Transitive eq_equiv.
   #[export]
-  Hint Resolve (Equivalence_Transitive eq_equiv): core.
+  Hint Resolve _eq_equiv_trans: core.
 
   Inductive lt_ (lhs rhs:t): Prop :=
   | lt_hd

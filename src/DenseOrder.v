@@ -773,7 +773,7 @@ Module DOMap.
       + rewrite PositiveMap.gleaf in FIND'. congr.
     }
     destruct (raw_max_key t0_2) eqn:Y.
-    { exploit raw_max_key_spec2; eauto. i. des. splits; i; auto.
+    { hexploit raw_max_key_spec2; eauto. i. des. splits; i; auto.
       destruct k'; ss.
       - exploit MAX; eauto. i. inv x.
         + left. econs. eauto.
@@ -782,7 +782,7 @@ Module DOMap.
       - left. econs.
     }
     destruct (raw_max_key t0_1) eqn:Z.
-    { exploit raw_max_key_spec2; eauto. i. des. splits; i; auto.
+    { hexploit raw_max_key_spec2; eauto. i. des. splits; i; auto.
       destruct k'; ss.
       - erewrite raw_max_key_spec1 in FIND'; eauto. congr.
       - exploit MAX; eauto. i. inv x.
@@ -863,10 +863,10 @@ Module DenseOrderFacts.
         (RHS: DenseOrder.lt rhs o):
     DenseOrder.lt (DenseOrder.join lhs rhs) o.
   Proof.
-    exploit DenseOrder.join_spec.
+    hexploit DenseOrder.join_spec.
     - apply DenseOrder.le_lteq. left. apply LHS.
     - apply DenseOrder.le_lteq. left. apply RHS.
-    - i. apply DenseOrder.le_lteq in x0. des; auto. subst.
+    - i. apply DenseOrder.le_lteq in H. des; auto. subst.
       generalize (DenseOrder.join_cases lhs rhs). i. des.
       + rewrite H at 1. auto.
       + rewrite H at 1. auto.

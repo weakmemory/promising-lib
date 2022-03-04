@@ -64,7 +64,7 @@ Hint Immediate rt1n_refl rt1n_trans t_step: core.
 #[export]
 Hint Resolve Relation_Operators.rt1n_trans: core.
 
-Program Instance rtc_PreOrder A (R:A -> A -> Prop): PreOrder (rtc R).
+Global Program Instance rtc_PreOrder A (R:A -> A -> Prop): PreOrder (rtc R).
 Next Obligation.
   ii. revert H0. induction H; auto. i.
   exploit IHclos_refl_trans_1n; eauto.
