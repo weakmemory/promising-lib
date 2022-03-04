@@ -294,3 +294,9 @@ Proof.
   - inv FORALL. exploit IHl1; eauto. i. des. eauto.
   - inv FORALL. exploit IHl1; eauto. i. des. ss.
 Qed.
+
+Lemma option_rel_mon A B (R0 R1: A -> B-> Prop)
+      (LE: forall a b (PR: R0 a b), R1 a b)
+  :
+    forall a b (PR: option_rel R0 a b), option_rel R1 a b.
+Proof. i. unfold option_rel in *. des_ifs. auto. Qed.
