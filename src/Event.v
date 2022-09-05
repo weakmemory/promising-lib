@@ -1,7 +1,7 @@
 Require Import List.
-Require Import PeanoNat.
 Require Import Orders.
 Require Import MSetList.
+Require Import ZArith.
 
 From sflib Require Import sflib.
 
@@ -14,75 +14,75 @@ Set Implicit Arguments.
 
 
 Module Const.
-  Definition num_t: Type := nat.
+  Definition num_t: Type := Z.
 
   Variant t :=
   | num (n: num_t)
   | undef
   .
 
-  Definition of_nat (n: nat): t := num n.
-  Definition zero: t := num 0.
-  Definition one: t := num 1.
+  Definition of_Z (n: Z): t := num n.
+  Definition zero: t := num 0%Z.
+  Definition one: t := num 1%Z.
 
   Definition eqb (a b: t): option bool :=
     match a, b with
-    | num a, num b => Some (a =? b)
+    | num a, num b => Some (a =? b)%Z
     | _, _ => None
     end.
 
   Definition add (a b: t): t :=
     match a, b with
-    | num a, num b => num (a + b)
+    | num a, num b => num (a + b)%Z
     | _, _ => undef
     end.
 
   Definition sub (a b: t): t :=
     match a, b with
-    | num a, num b => num (a - b)
+    | num a, num b => num (a - b)%Z
     | _, _ => undef
     end.
 
   Definition mul (a b: t): t :=
     match a, b with
-    | num a, num b => num (a * b)
+    | num a, num b => num (a * b)%Z
     | _, _ => undef
     end.
 
   Definition le (lhs rhs: t): bool :=
     match lhs, rhs with
-    | num x, num y => x =? y
+    | num x, num y => (x =? y)%Z
     | _, undef => true
     | _, _ => false
     end.
 
   Lemma eqb_refl a: eqb a a <> Some false.
   Proof.
-    destruct a; ss. rewrite Nat.eqb_refl. ss.
+    destruct a; ss. rewrite Z.eqb_refl. ss.
   Qed.
 
   Lemma eqb_sym a b: eqb a b = eqb b a.
   Proof.
     destruct a, b; ss.
-    rewrite Nat.eqb_sym. ss.
+    rewrite Z.eqb_sym. ss.
   Qed.
 
-  Lemma add_0_l a: add (num 0) a = a.
+  Lemma add_0_l a: add (num 0%Z) a = a.
   Proof.
     destruct a; ss.
   Qed.
 
-  Lemma add_0_r a: add a (num 0) = a.
+  Lemma add_0_r a: add a (num 0%Z) = a.
   Proof.
     destruct a; ss.
-    rewrite Nat.add_0_r. ss.
+    rewrite Z.add_0_r. ss.
   Qed.
 
   Lemma add_assoc a b c:
     add a (add b c) = add (add a b) c.
   Proof.
     destruct a, b, c; ss.
-    rewrite Nat.add_assoc. ss.
+    rewrite Z.add_assoc. ss.
   Qed.
 
   Lemma antisym
@@ -92,7 +92,7 @@ Module Const.
     a = b.
   Proof.
     destruct a, b; ss.
-    inv AB. rewrite Nat.eqb_eq in H0. subst. ss.
+    inv AB. rewrite Z.eqb_eq in H0. subst. ss.
   Qed.
 
   Lemma le_num_inv
@@ -101,7 +101,7 @@ Module Const.
     c = num n.
   Proof.
     destruct c; ss.
-    inv LE. rewrite Nat.eqb_eq in H0. subst. ss.
+    inv LE. rewrite Z.eqb_eq in H0. subst. ss.
   Qed.
 
   Lemma undef_le_inv
@@ -114,16 +114,16 @@ Module Const.
 
   Global Program Instance le_PreOrder: PreOrder le.
   Next Obligation.
-    ii. destruct x; ss. rewrite Nat.eqb_refl. ss.
+    ii. destruct x; ss. rewrite Z.eqb_refl. ss.
   Qed.
   Next Obligation.
     ii. destruct x, y, z; ss. inv H. inv H0.
-    rewrite Nat.eqb_eq in H1, H2. subst.
-    rewrite Nat.eqb_refl. ss.
+    rewrite Z.eqb_eq in H1, H2. subst.
+    rewrite Z.eqb_refl. ss.
   Qed.
 End Const.
 Coercion Const.num: Const.num_t >-> Const.t.
-Coercion Const.of_nat: nat >-> Const.t.
+Coercion Const.of_Z: Z >-> Const.t.
 
 
 Module Ordering.
