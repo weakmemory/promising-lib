@@ -165,7 +165,8 @@ Proof.
   i. cut (forall m k, k < m -> P k); [by eauto|].
   induction m.
   - i. lia.
-  - i. apply lt_le_S in H. inv H; eauto.
+  - i. assert (S k <= S m) as KM by lia. 
+    inv KM; eauto.
 Qed.
 
 Definition option_app {A} (a b: option A) : option A :=
